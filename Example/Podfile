@@ -1,0 +1,14 @@
+use_frameworks!
+
+target 'SelfieKit_Example', :exclusive => true do
+  pod 'SelfieKit', :path => '../'
+end
+
+target 'SelfieKit_Tests', :exclusive => true do
+  pod 'SelfieKit', :path => '../'
+
+  pod 'Quick', '~> 0.8'
+  pod 'Nimble', '~> 3.0'
+  pod 'FBSnapshotTestCase'
+  pod 'Nimble-Snapshots'
+end
