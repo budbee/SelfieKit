@@ -1,0 +1,6 @@
+framework module SelfieKit {
+  umbrella header "SelfieKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

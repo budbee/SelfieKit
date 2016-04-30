@@ -7,12 +7,28 @@
 //
 
 import UIKit
+import SelfieKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, SelfiePickerDelegate {
+    
+    var selfiePicker: SelfiePickerController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        selfiePicker = SelfiePickerController()
+        selfiePicker?.delegate = self
+        presentViewController(selfiePicker!, animated: true, completion: nil)
+        
+    }
+    
+    func doneButtonDidPress(image: UIImage) {
+        print("Took a selfie: ", image)
+        selfiePicker?.dismissViewControllerAnimated(true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

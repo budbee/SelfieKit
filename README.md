@@ -5,6 +5,9 @@
 [![License](https://img.shields.io/cocoapods/l/SelfieKit.svg?style=flat)](http://cocoapods.org/pods/SelfieKit)
 [![Platform](https://img.shields.io/cocoapods/p/SelfieKit.svg?style=flat)](http://cocoapods.org/pods/SelfieKit)
 
+**SelfieKit** lets you quickly take Selfies with an assisted overlay.
+We at [Budbee](http://www.budbee.com) use this in our driver application (our drivers are very vain)
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -22,7 +25,7 @@ pod "SelfieKit"
 
 ## Author
 
-Axel Möller, axel.moller@budbee.com
+Axel Moller, axel.moller@budbee.com
 
 ## License
 
