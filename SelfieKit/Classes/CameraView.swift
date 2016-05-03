@@ -105,6 +105,18 @@ class CameraView: UIViewController {
         setupConstraints()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        setCorrectOrientationToPreviewLayer()
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        previewLayer?.frame.size = size
+        setCorrectOrientationToPreviewLayer()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -349,6 +361,25 @@ class CameraView: UIViewController {
         guard let image = UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection) else { return UIImage() }
         
         return image
+    }
+    
+    func setCorrectOrientationToPreviewLayer() {
+        guard let previewLayer = self.previewLayer,
+            connection = previewLayer.connection
+            else { return }
+        
+        switch UIDevice.currentDevice().orientation {
+        case .Portrait:
+            connection.videoOrientation = .Portrait
+        case .LandscapeLeft:
+            connection.videoOrientation = .LandscapeRight
+        case .LandscapeRight:
+            connection.videoOrientation = .LandscapeLeft
+        case .PortraitUpsideDown:
+            connection.videoOrientation = .PortraitUpsideDown
+        default:
+            break
+        }
     }
     
 }
