@@ -123,8 +123,11 @@ class CameraView: UIViewController {
         let centerX = view.bounds.width / 2
         
         noCameraLabel.center = CGPoint(x: centerX, y: view.bounds.height / 2 - 100)
-        
         noCameraButton.center = CGPoint(x: centerX, y: noCameraLabel.frame.maxY + 20)
+        
+        [noCameraLabel, noCameraButton].forEach {
+            view.bringSubviewToFront($0)
+        }
     }
     
     func initializeCamera() {
