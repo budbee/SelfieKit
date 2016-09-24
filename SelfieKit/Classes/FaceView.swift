@@ -20,7 +20,7 @@ class FaceView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clearColor()
+        backgroundColor = .clear()
         translatesAutoresizingMaskIntoConstraints = false
         
         [ellipseView].forEach {
@@ -35,22 +35,22 @@ class FaceView: UIView {
     }
     
     func setupConstraints() {
-        let attributes: [NSLayoutAttribute] = [.CenterX, .CenterY, .Width, .Height]
+        let attributes: [NSLayoutAttribute] = [.centerX, .centerY, .width, .height]
         
         for attribute in attributes {
-            addConstraint(NSLayoutConstraint(item: ellipseView, attribute: attribute, relatedBy: .Equal, toItem: self, attribute: attribute, multiplier: 1, constant: 0))
+            addConstraint(NSLayoutConstraint(item: ellipseView, attribute: attribute, relatedBy: .equal, toItem: self, attribute: attribute, multiplier: 1, constant: 0))
         }
     }
     
-    func getImage(name: String) -> UIImage {
+    func getImage(_ name: String) -> UIImage {
         let traitCollection = UITraitCollection(displayScale: 3)
-        var bundle = NSBundle(forClass: self.classForCoder)
+        var bundle = Bundle(for: self.classForCoder)
         
-        if let bundlePath = NSBundle(forClass: self.classForCoder).resourcePath?.stringByAppendingString("/SelfieKit.bundle"), resourceBundle = NSBundle(path: bundlePath) {
+        if let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfieKit.bundle", let resourceBundle = Bundle(path: bundlePath) {
             bundle = resourceBundle
         }
         
-        guard let image = UIImage(named: name, inBundle: bundle, compatibleWithTraitCollection: traitCollection) else { return UIImage() }
+        guard let image = UIImage(named: name, in: bundle, compatibleWith: traitCollection) else { return UIImage() }
         
         return image
     }

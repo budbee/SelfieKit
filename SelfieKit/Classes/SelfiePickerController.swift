@@ -10,16 +10,16 @@ import UIKit
 import MediaPlayer
 
 public protocol SelfiePickerDelegate: class {
-    func doneButtonDidPress(image: UIImage)
+    func doneButtonDidPress(_ image: UIImage)
 }
 
-public class SelfiePickerController: UIViewController {
+open class SelfiePickerController: UIViewController {
     
     struct Dimensions {
         static let bottomContainerHeight: CGFloat = 101
     }
     
-    public lazy var bottomContainer: BottomContainerView = { [unowned self] in
+    open lazy var bottomContainer: BottomContainerView = { [unowned self] in
         let view = BottomContainerView()
         view.backgroundColor = UIColor(red: 0.09, green: 0.11, blue: 0.13, alpha: 1)
         view.delegate = self
@@ -29,7 +29,7 @@ public class SelfiePickerController: UIViewController {
     
     lazy var topView: TopView = { [unowned self] in
         let view = TopView()
-        view.backgroundColor = .clearColor()
+        view.backgroundColor = .clear()
         view.delegate = self
         
         return view
@@ -49,15 +49,15 @@ public class SelfiePickerController: UIViewController {
         return photoView
     }()
     
-    public weak var delegate: SelfiePickerDelegate?
+    open weak var delegate: SelfiePickerDelegate?
     var statusBarHidden = true
     
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         for subview in [cameraController.view, photoView, bottomContainer, topView] {
-            view.addSubview(subview)
-            subview.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(subview!)
+            subview?.translatesAutoresizingMaskIntoConstraints = false
         }
         
         view.backgroundColor = Configuration.mainColor
@@ -65,38 +65,38 @@ public class SelfiePickerController: UIViewController {
         setupConstraints()
     }
     
-    public override func viewWillAppear(animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        statusBarHidden = UIApplication.sharedApplication().statusBarHidden
-        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+        statusBarHidden = UIApplication.shared.isStatusBarHidden
+        UIApplication.shared.setStatusBarHidden(true, with: .fade)
     }
     
-    public override func viewDidAppear(animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    public override func viewWillDisappear(animated: Bool) {
+    open override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UIApplication.sharedApplication().setStatusBarHidden(statusBarHidden, withAnimation: .Fade)
+        UIApplication.shared.setStatusBarHidden(statusBarHidden, with: .fade)
     }
     
-    public override func viewDidDisappear(animated: Bool) {
+    open override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
-    public override func prefersStatusBarHidden() -> Bool {
+    open override var prefersStatusBarHidden : Bool {
         return true
     }
     
     // MARK: - Actions
     
-    func showResult(show: Bool) {
+    func showResult(_ show: Bool) {
         photoView.alpha = show ? 1 : 0
-        topView.flashButton.hidden = show
-        topView.rotateCamera.hidden = show
-        bottomContainer.doneButton.hidden = !show
-        bottomContainer.retakeButton.hidden = !show
-        bottomContainer.pickerbutton.enabled = !show
+        topView.flashButton.isHidden = show
+        topView.rotateCamera.isHidden = show
+        bottomContainer.doneButton.isHidden = !show
+        bottomContainer.retakeButton.isHidden = !show
+        bottomContainer.pickerbutton.isEnabled = !show
     }
     
 }
@@ -121,7 +121,7 @@ extension SelfiePickerController: BottomContainerViewDelegate {
 // MARK: - Top View Delegate
 
 extension SelfiePickerController: TopViewDelegate {
-    func flashButtonDidPress(title: String) {
+    func flashButtonDidPress(_ title: String) {
         cameraController.flashCamera(title)
     }
     
@@ -133,7 +133,7 @@ extension SelfiePickerController: TopViewDelegate {
 // MARK: - Camera Delegate
 
 extension SelfiePickerController: CameraViewDelegate {
-    func didTakeSelfie(image: UIImage) {
+    func didTakeSelfie(_ image: UIImage) {
         photoView.image = image
         showResult(true)
     }

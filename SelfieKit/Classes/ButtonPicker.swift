@@ -33,18 +33,18 @@ class ButtonPicker: UIButton {
     }
     
     func setupButton() {
-        backgroundColor = .whiteColor()
+        backgroundColor = .white()
         layer.cornerRadius = Dimensions.buttonSize / 2
-        addTarget(self, action: #selector(ButtonPicker.pickerButtonDidPress(_:)), forControlEvents: .TouchUpInside)
-        addTarget(self, action: #selector(ButtonPicker.pickerButtonDidHighlight(_:)), forControlEvents: .TouchDown)
+        addTarget(self, action: #selector(ButtonPicker.pickerButtonDidPress(_:)), for: .touchUpInside)
+        addTarget(self, action: #selector(ButtonPicker.pickerButtonDidHighlight(_:)), for: .touchDown)
     }
     
-    func pickerButtonDidPress(button: UIButton) {
-        backgroundColor = .whiteColor()
+    func pickerButtonDidPress(_ button: UIButton) {
+        backgroundColor = .white()
         delegate?.buttonDidPress()
     }
     
-    func pickerButtonDidHighlight(button: UIButton) {
+    func pickerButtonDidHighlight(_ button: UIButton) {
         backgroundColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1)
     }
     

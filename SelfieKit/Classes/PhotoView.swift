@@ -12,7 +12,7 @@ class PhotoView: UIImageView {
     
     override init(image: UIImage?) {
         super.init(image: image)
-        contentMode = .ScaleAspectFill
+        contentMode = .scaleAspectFill
     }
     
     required init?(coder aDecoder: NSCoder) {

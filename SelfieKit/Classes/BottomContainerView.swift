@@ -14,7 +14,7 @@ protocol BottomContainerViewDelegate: class {
     func doneButtonDidPress()
 }
 
-public class BottomContainerView: UIView {
+open class BottomContainerView: UIView {
     
     lazy var pickerbutton: ButtonPicker = { [unowned self] in
         let pickerButton = ButtonPicker()
@@ -25,30 +25,30 @@ public class BottomContainerView: UIView {
     
     lazy var borderPickerButton: UIView = {
         let view = UIView()
-        view.backgroundColor = .clearColor()
-        view.layer.borderColor = UIColor.whiteColor().CGColor
+        view.backgroundColor = .clear()
+        view.layer.borderColor = UIColor.white.cgColor
         view.layer.borderWidth = ButtonPicker.Dimensions.borderWidth
         view.layer.cornerRadius = ButtonPicker.Dimensions.buttonBorderSize / 2
         
         return view
     }()
     
-    public lazy var retakeButton: UIButton = { [unowned self] in
+    open lazy var retakeButton: UIButton = { [unowned self] in
         let button = UIButton()
-        button.setTitle(Configuration.retakeButtonTitle, forState: .Normal)
+        button.setTitle(Configuration.retakeButtonTitle, for: UIControlState())
         button.titleLabel?.font = Configuration.retakeButton
-        button.addTarget(self, action: #selector(BottomContainerView.retakeButtonDidPress(_:)), forControlEvents: .TouchUpInside)
-        button.hidden = true
+        button.addTarget(self, action: #selector(BottomContainerView.retakeButtonDidPress(_:)), for: .touchUpInside)
+        button.isHidden = true
         
         return button
     }()
     
-    public lazy var doneButton: UIButton = { [unowned self] in
+    open lazy var doneButton: UIButton = { [unowned self] in
         let button = UIButton()
-        button.setTitle(Configuration.doneButtonTitle, forState: .Normal)
+        button.setTitle(Configuration.doneButtonTitle, for: UIControlState())
         button.titleLabel?.font = Configuration.doneButton
-        button.addTarget(self, action: #selector(BottomContainerView.doneButtonDidPress(_:)), forControlEvents: .TouchUpInside)
-        button.hidden = true
+        button.addTarget(self, action: #selector(BottomContainerView.doneButtonDidPress(_:)), for: .touchUpInside)
+        button.isHidden = true
         
         return button
     }()
@@ -79,11 +79,11 @@ public class BottomContainerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func retakeButtonDidPress(button: UIButton) {
+    func retakeButtonDidPress(_ button: UIButton) {
         delegate?.retakeButtonDidPress()
     }
     
-    func doneButtonDidPress(button: UIButton) {
+    func doneButtonDidPress(_ button: UIButton) {
         delegate?.doneButtonDidPress()
     }
 }
