@@ -20,7 +20,7 @@ class FaceView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .clear()
+        backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
         
         [ellipseView].forEach {
@@ -46,8 +46,10 @@ class FaceView: UIView {
         let traitCollection = UITraitCollection(displayScale: 3)
         var bundle = Bundle(for: self.classForCoder)
         
-        if let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfieKit.bundle", let resourceBundle = Bundle(path: bundlePath) {
-            bundle = resourceBundle
+        let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfieKit.bundle"
+        let resourceBundle = Bundle(path: bundlePath)
+        if nil != resourceBundle {
+            bundle = resourceBundle!
         }
         
         guard let image = UIImage(named: name, in: bundle, compatibleWith: traitCollection) else { return UIImage() }

@@ -17,18 +17,18 @@ class ViewController: UIViewController, SelfiePickerDelegate {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         selfiePicker = SelfiePickerController()
         selfiePicker?.delegate = self
-        presentViewController(selfiePicker!, animated: true, completion: nil)
+        present(selfiePicker!, animated: true, completion: nil)
         
     }
     
-    func doneButtonDidPress(image: UIImage) {
+    func doneButtonDidPress(_ image: UIImage) {
         print("Took a selfie: ", image)
-        selfiePicker?.dismissViewControllerAnimated(true, completion: nil)
+        selfiePicker?.dismiss(animated: true, completion: nil)
     }
 
     override func didReceiveMemoryWarning() {

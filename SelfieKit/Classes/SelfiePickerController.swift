@@ -29,7 +29,7 @@ open class SelfiePickerController: UIViewController {
     
     lazy var topView: TopView = { [unowned self] in
         let view = TopView()
-        view.backgroundColor = .clear()
+        view.backgroundColor = .clear
         view.delegate = self
         
         return view

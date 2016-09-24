@@ -37,7 +37,7 @@ class CameraView: UIViewController {
     lazy var focusImageView: UIImageView = { [unowned self] in
         let imageView = UIImageView()
         imageView.image = self.getImage("focusIcon")
-        imageView.backgroundColor = .clear()
+        imageView.backgroundColor = .clear
         imageView.frame = CGRect(x: 0, y: 0, width: 110, height: 110)
         imageView.alpha = 0
         
@@ -52,7 +52,7 @@ class CameraView: UIViewController {
     
     lazy var capturedImageView: UIView = { [unowned self] in
         let view = UIView()
-        view.backgroundColor = .black()
+        view.backgroundColor = .black
         view.alpha = 0
         
         return view
@@ -368,8 +368,10 @@ class CameraView: UIViewController {
         let traitCollection = UITraitCollection(displayScale: 3)
         var bundle = Bundle(for: self.classForCoder)
         
-        if let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfiePicker.bundle", let resourceBundle = Bundle(path: bundlePath) {
-            bundle = resourceBundle
+        let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfiePicker.bundle"
+        let resourceBundle = Bundle(path: bundlePath)
+        if nil != resourceBundle {
+            bundle = resourceBundle!
         }
         
         guard let image = UIImage(named: name, in: bundle, compatibleWith: traitCollection) else { return UIImage() }

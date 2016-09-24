@@ -29,8 +29,8 @@ class TopView: UIView {
         button.setImage(self.getImage("AUTO"), for: UIControlState())
         button.setTitle("AUTO", for: UIControlState())
         button.titleEdgeInsets = UIEdgeInsetsMake(0, 4, 0, 0)
-        button.setTitleColor(.white(), for: UIControlState())
-        button.setTitleColor(.white(), for: .highlighted)
+        button.setTitleColor(.white, for: UIControlState())
+        button.setTitleColor(.white, for: .highlighted)
         button.titleLabel?.font = Configuration.flashButton
         button.addTarget(self, action: #selector(TopView.flashButtonDidPress(_:)), for: .touchUpInside)
         button.contentHorizontalAlignment = .left
@@ -77,8 +77,8 @@ class TopView: UIView {
             button.setTitleColor(UIColor(red: 0.98, green: 0.98, blue: 0.45, alpha: 1), for: UIControlState())
             button.setTitleColor(UIColor(red: 0.52, green: 0.52, blue: 0.24, alpha: 1), for: .highlighted)
         default:
-            button.setTitleColor(.white(), for: UIControlState())
-            button.setTitleColor(.white(), for: .highlighted)
+            button.setTitleColor(.white, for: UIControlState())
+            button.setTitleColor(.white, for: .highlighted)
         }
         
         let newTitle = flashButtonTitles[currentFlashIndex]
@@ -98,8 +98,10 @@ class TopView: UIView {
         let traitCollection = UITraitCollection(displayScale: 3)
         var bundle = Bundle(for: self.classForCoder)
         
-        if let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfieKit.bundle", let resourceBundle = Bundle(path: bundlePath) {
-            bundle = resourceBundle
+        let bundlePath = (Bundle(for: self.classForCoder).resourcePath)! + "/SelfieKit.bundle"
+        let resourceBundle = Bundle(path: bundlePath)
+        if nil != resourceBundle {
+            bundle = resourceBundle!
         }
         
         guard let image = UIImage(named: name, in: bundle, compatibleWith: traitCollection) else { return UIImage() }

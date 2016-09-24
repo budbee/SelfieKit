@@ -1,14 +1,22 @@
 use_frameworks!
 
-target 'SelfieKit_Example', :exclusive => true do
+target 'SelfieKit_Example' do
   pod 'SelfieKit', :path => '../'
 end
 
-target 'SelfieKit_Tests', :exclusive => true do
+target 'SelfieKit_Tests' do
   pod 'SelfieKit', :path => '../'
 
-  pod 'Quick', '~> 0.8'
-  pod 'Nimble', '~> 3.0'
-  pod 'FBSnapshotTestCase'
+  pod 'Quick', '~> 0.10'
+  pod 'Nimble', '~> 5.0'
   pod 'Nimble-Snapshots'
+  pod 'FBSnapshotTestCase', :git => 'git@github.com:facebook/ios-snapshot-test-case.git', :branch => 'master'
+end
+
+post_install do |installer|
+	installer.pods_project.targets.each do |target|
+		target.build_configurations.each do |config|
+			config.build_settings['SWIFT_VERSION'] = '3.0'
+		end
+	end
 end
